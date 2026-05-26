@@ -50,7 +50,7 @@ across all devices.
 
 ## 🚀 Deployment
 
-- **Live Demo:** [View Live Site]
+- **Live View:** https://codingwithlucy.github.io/Project-3_PERSONAL-WEBSITE-CHEMISTRY-MOTIVE/
 - **Source Code:**
   https://github.com/CodingwithLucy/Project-3_PERSONAL-WEBSITE-CHEMISTRY-MOTIVE
 
