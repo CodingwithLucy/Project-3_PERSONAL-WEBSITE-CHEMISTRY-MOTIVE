@@ -52,9 +52,20 @@
               <a href="#contact" class="nav-link px-2 link-success">Contact</a>
             </li>
           </ul>
-          <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
+          <form class="search-box d-flex align-items-center" onsubmit="return false;">
+            <div class="search-wrapper">
+              <input class="search-input" type="text" placeholder="Search..." aria-label="Search">
+
+              <div class="search-inline-nav d-none">
+                <button type="button" class="search-prev">◀</button>
+                <span class="search-counter">0/0</span>
+                <button type="button" class="search-next">▶</button>
+              </div>
+            </div>
+
+            <button type="button" class="search-btn btn btn-outline-success ms-2">
+              Search
+            </button>
           </form>
         </div>
       </div>
@@ -554,6 +565,165 @@
     });
   </script>
 
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const input = document.querySelector(".search-input");
+      const searchBtn = document.querySelector(".search-btn");
+      const navBox = document.querySelector(".search-inline-nav");
+      const prevBtn = document.querySelector(".search-prev");
+      const nextBtn = document.querySelector(".search-next");
+      const counter = document.querySelector(".search-counter");
+
+      let results = [];
+      let currentIndex = 0;
+      let lastTerm = "";
+
+      function clearHighlights() {
+        document.querySelectorAll(".search-highlight").forEach(el => {
+          const parent = el.parentNode;
+          parent.replaceChild(document.createTextNode(el.textContent), el);
+          parent.normalize();
+        });
+      }
+
+      function getAllTextNodes() {
+        const nodes = [];
+        const walker = document.createTreeWalker(
+          document.body,
+          NodeFilter.SHOW_TEXT,
+          {
+            acceptNode(node) {
+              if (node.parentNode.closest("nav")) return NodeFilter.FILTER_REJECT;
+              if (!node.textContent.trim()) return NodeFilter.FILTER_REJECT;
+              return NodeFilter.FILTER_ACCEPT;
+            }
+          }
+        );
+
+        while (walker.nextNode()) {
+          nodes.push(walker.currentNode);
+        }
+        return nodes;
+      }
+
+      function highlightAll(term) {
+        clearHighlights();
+        results = [];
+        currentIndex = 0;
+
+        const nodes = getAllTextNodes();
+
+        nodes.forEach(node => {
+          let text = node.textContent;
+          let lower = text.toLowerCase();
+          let start = 0;
+
+          const fragments = [];
+
+          while (true) {
+            const index = lower.indexOf(term, start);
+            if (index === -1) break;
+
+            fragments.push({
+              start: index,
+              end: index + term.length
+            });
+
+            start = index + term.length;
+          }
+
+          if (fragments.length === 0) return;
+
+          const parent = node.parentNode;
+          const newNodes = [];
+          let lastIndex = 0;
+
+          fragments.forEach(f => {
+            if (f.start > lastIndex) {
+              newNodes.push(document.createTextNode(text.slice(lastIndex, f.start)));
+            }
+
+            const span = document.createElement("span");
+            span.className = "search-highlight";
+            span.textContent = text.slice(f.start, f.end);
+            newNodes.push(span);
+            results.push(span);
+
+            lastIndex = f.end;
+          });
+
+          if (lastIndex < text.length) {
+            newNodes.push(document.createTextNode(text.slice(lastIndex)));
+          }
+
+          newNodes.forEach(n => parent.insertBefore(n, node));
+          parent.removeChild(node);
+        });
+      }
+
+      function scrollToResult(index) {
+        if (!results.length) return;
+
+        const el = results[index];
+        const rect = el.getBoundingClientRect();
+
+        window.scrollTo({
+          top: rect.top + window.scrollY - 150,
+          behavior: "smooth"
+        });
+
+        counter.textContent = `${index + 1}/${results.length}`;
+      }
+
+      prevBtn.onclick = () => {
+        if (!results.length) return;
+        currentIndex = (currentIndex - 1 + results.length) % results.length;
+        scrollToResult(currentIndex);
+      };
+
+      nextBtn.onclick = () => {
+        if (!results.length) return;
+        currentIndex = (currentIndex + 1) % results.length;
+        scrollToResult(currentIndex);
+      };
+
+      function runSearch() {
+        const term = input.value.trim().toLowerCase();
+        if (!term) return;
+
+        if (term === lastTerm && results.length > 0) {
+          currentIndex = (currentIndex + 1) % results.length;
+          scrollToResult(currentIndex);
+          return;
+        }
+
+        lastTerm = term;
+
+        highlightAll(term);
+
+        if (results.length === 0) {
+          navBox.classList.add("d-none");
+          alert("No results found");
+          return;
+        }
+
+        currentIndex = 0;
+        navBox.classList.remove("d-none");
+        scrollToResult(currentIndex);
+      }
+
+      input.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          runSearch();
+        }
+      });
+
+      searchBtn.addEventListener("click", function () {
+        runSearch();
+      });
+    });
+  </script>
 
 </body>
 

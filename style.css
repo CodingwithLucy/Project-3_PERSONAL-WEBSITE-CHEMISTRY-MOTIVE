@@ -105,6 +105,69 @@ a:hover {
   height: 75vh;
 }
 
+.search-box {
+  position: relative;
+  gap: 0.5rem;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
+}
+
+.search-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.search-input {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 0.4rem 0.8rem;
+  padding-right: 70px;
+  border-radius: 6px;
+  background-color: rgba(255, 255, 255, 0.7);
+  transition: box-shadow 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  box-shadow: 0 0 6px rgba(25, 135, 84, 0.4);
+}
+
+.search-inline-nav {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: #555;
+}
+
+.search-inline-nav button {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 12px;
+  cursor: pointer;
+  color: #555;
+}
+
+.search-inline-nav button:hover {
+  color: #198754;
+}
+
+.search-counter {
+  font-size: 12px;
+  color: #555;
+}
+
+.search-highlight {
+  background: yellow;
+  color: black;
+  padding: 2px 0;
+}
+
 #main {
   background-image: url('./background.jpg');
   background-size: cover;
@@ -486,7 +549,7 @@ h4 {
     margin: 0;
     padding: 0;
     height: auto;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
   }
 
   .navbar-nav {
@@ -494,14 +557,9 @@ h4 {
     gap: 1rem;
   }
 
-  .navbar-collapse {
-    flex-wrap: wrap;
-  }
-
-  form.d-flex {
-    width: auto;
-    max-width: 280px;
-    margin-top: 0;
+  .search-box {
+    margin-left: 0;
+    margin-right: 0;
     justify-content: flex-start;
   }
 
@@ -546,5 +604,28 @@ h4 {
 
   #contact img {
     height: 65px;
+  }
+}
+
+/* =========================================
+   DESKTOP XL (≥1200px)
+========================================= */
+@media (min-width: 1200px) {
+  .navbar-collapse {
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .search-box {
+    margin-left: 0;
+    margin-right: 0;
+    justify-content: flex-end;
+    width: auto;
+  }
+
+  form.d-flex {
+    flex-direction: row;
+    align-items: center;
   }
 }
