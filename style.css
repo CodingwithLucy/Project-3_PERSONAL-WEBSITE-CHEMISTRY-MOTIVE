@@ -100,9 +100,12 @@ a:hover {
   border: 1px solid rgba(255, 255, 255, 0.3);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
   border-radius: 1rem;
-  margin: 2rem 2rem;
   padding: 1rem;
-  height: 75vh;
+  height: auto;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  width: calc(100% - 4rem);
+  margin-inline: auto;
 }
 
 .search-box {
@@ -171,7 +174,7 @@ a:hover {
 #main {
   background-image: url('./background.jpg');
   background-size: cover;
-  background-position: center;
+  background-position: left center;
   height: 100vh;
 }
 
@@ -463,12 +466,30 @@ h4 {
   margin-bottom: 2rem;
 }
 
+.glass {
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  background-color: rgba(255, 255, 255, 0.18);
+  padding: 0.4rem 1.2rem;
+  border-radius: 0.6rem;
+  display: inline-block;
+  transition:
+    transform 0.2s ease,
+    letter-spacing 0.2s ease !important;
+}
+
+.glass:hover {
+  transform: scale(1.05) !important;
+  letter-spacing: 0.03125rem !important;
+  font-weight: 600 !important;
+}
+
 #contact {
   background-image: url('./background-footer.jpg');
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   background-size: cover;
-  background-position: center;
+  background-position: right center;
   height: 100vh;
   padding: 3rem 0 2rem 0;
 }
