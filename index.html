@@ -49,6 +49,9 @@
               <a href="#articles" class="nav-link px-2 link-success">Articles</a>
             </li>
             <li class="nav-item">
+              <a href="/projects.html" class="nav-link px-2 link-success text-success">PROJECTS</a>
+            </li>
+            <li class="nav-item">
               <a href="#contact" class="nav-link px-2 link-success">Contact</a>
             </li>
           </ul>
@@ -72,7 +75,7 @@
     </nav>
 
     <div class="hero">
-      <h1 class="fade-in-up hover-lift text-success">Lucy Doe</h1>
+      <h1 class="fade-in-up hover-lift text-success">Lucy Jane Doe</h1>
       <h2 class="text-secondary fade-in-up hover-lift">PhD of Chemical Sciences</h2>
 
       <a href="#contact">
@@ -392,52 +395,63 @@
           </h2>
         </div>
       </div>
+
       <div class="row justify-content-md-center mb-4 g-3">
-        <div class="col-12 col-md-6">
-          <div class="certificate-card fade-in-up hover-lift">
-            <p class="certificate-date">MAY 2022</p>
-            <h3>
-              INTERNATIONAL SUMMER SCHOOL „Etiam suscipit quis sapien eget ultricies.”
-            </h3>
-            <h4 class="fst-italic pb-3">
-              University, City, Country
-            </h4>
+
+        <div class="cert-carousel fade-in-up">
+          <button class="cert-arrow left" aria-label="Scroll left">‹</button>
+
+          <div class="cert-scroll">
+            <div class="certificate-card hover-lift">
+              <p class="certificate-date">Sep 2026</p>
+              <h3>INTERNATIONAL SUMMER SCHOOL „Etiam suscipit quis sapien eget ultricies.”</h3>
+              <h4 class="fst-italic pb-3">University, City, Country</h4>
+            </div>
+
+            <div class="certificate-card hover-lift">
+              <p class="certificate-date">June 2026</p>
+              <h3>CERTIFIED TRAINING „Cras ornare leo tempor nibh aliquam malesuada.”</h3>
+              <h4 class="fst-italic pb-3">University, City, Country</h4>
+            </div>
+
+            <div class="certificate-card hover-lift">
+              <p class="certificate-date">June 2026</p>
+              <h3>FOREIGN SCIENTIFIC INTERNSHIP: "Nunc bibendum ex ex, a hendrerit nisl laoreet at."</h3>
+              <h4 class="fst-italic pb-3">University, City, Country</h4>
+            </div>
+
+            <div class="certificate-card hover-lift">
+              <p class="certificate-date">June 2026</p>
+              <h3>CERTIFIED TRAINING "Nam vel sodales lorem, ac pellentesque justo."</h3>
+              <h4 class="fst-italic pb-3">University, City, Country</h4>
+            </div>
+
+            <div class="certificate-card hover-lift">
+              <p class="certificate-date">June 2026</p>
+              <h3>CERTIFIED TRAINING "Vivamus commodo erat et lectus iaculis,
+                a congue quam finibus."</h3>
+              <h4 class="fst-italic pb-3">University, City, Country</h4>
+            </div>
+
+            <div class="certificate-card hover-lift">
+              <p class="certificate-date">June 2026</p>
+              <h3>INTERNATIONAL SUMMER SCHOOL „Etiam suscipit quis sapien eget ultricies.”</h3>
+              <h4 class="fst-italic pb-3">University, City, Country</h4>
+            </div>
+
+            <div class="certificate-card hover-lift">
+              <p class="certificate-date">June 2026</p>
+              <h3>CERTIFIED TRAINING „Cras ornare leo tempor nibh aliquam malesuada.”</h3>
+              <h4 class="fst-italic pb-3">University, City, Country</h4>
+            </div>
+
+            <div class="certificate-card hover-lift">
+              <p class="certificate-date">Jan 2026</p>
+              <h3>FOREIGN SCIENTIFIC INTERNSHIP: "Nunc bibendum ex ex, a hendrerit nisl laoreet at."</h3>
+              <h4 class="fst-italic pb-3">University, City, Country</h4>
+            </div>
           </div>
-
-        </div>
-
-
-        <div class="col-12 col-md-6">
-          <div class="certificate-card fade-in-up hover-lift">
-            <p class="certificate-date">MAY 2020 - MAR 2020</p>
-            <h3>
-              CERTIFIED TRAINING „Cras ornare leo tempor nibh aliquam malesuada.”
-            </h3>
-            <h4 class="fst-italic pb-3">University, City, Country</h4>
-          </div>
-        </div>
-
-        <div class="col-12 col-md-6">
-          <div class="certificate-card fade-in-up hover-lift">
-            <p class="certificate-date">FEB 2020</p>
-            <h3>
-              FOREIGN SCIENTIFIC INTERNSHIP: "Nunc bibendum ex ex, a hendrerit nisl laoreet at."
-            </h3>
-            <h4 class="fst-italic pb-3">University, City, Country</h4>
-          </div>
-        </div>
-
-        <div class="col-12 col-md-6">
-          <div class="certificate-card fade-in-up hover-lift">
-            <p class="certificate-date">DEC 2017</p>
-            <h3>
-              CERTIFIED TRAINING "Nam vel sodales lorem, ac pellentesque justo. Vivamus commodo erat et lectus iaculis,
-              a congue quam finibus."
-            </h3>
-            <h4 class="fst-italic pb-3">
-              University, City, Country
-            </h4>
-          </div>
+          <button class="cert-arrow right" aria-label="Scroll right">›</button>
         </div>
       </div>
   </section>
@@ -514,6 +528,9 @@
             </li>
             <li class="nav-item mb-2">
               <a href="#articles" class="nav-link p-0 text-body-secondary link-success">Articles</a>
+            </li>
+            <li class="nav-item mb-2">
+              <a href="/projects.html" class="nav-link p-0 text-body-secondary link-success text-success">PROJECTS</a>
             </li>
           </ul>
         </div>
@@ -725,6 +742,21 @@
     });
   </script>
 
+  <script>
+    document.querySelectorAll('.cert-carousel').forEach(carousel => {
+      const scrollContainer = carousel.querySelector('.cert-scroll');
+      const leftArrow = carousel.querySelector('.cert-arrow.left');
+      const rightArrow = carousel.querySelector('.cert-arrow.right');
+
+      leftArrow.addEventListener('click', () => {
+        scrollContainer.scrollBy({ left: -300, behavior: 'smooth' });
+      });
+
+      rightArrow.addEventListener('click', () => {
+        scrollContainer.scrollBy({ left: 300, behavior: 'smooth' });
+      });
+    });
+  </script>
 </body>
 
 </html>
